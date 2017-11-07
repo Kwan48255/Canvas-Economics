@@ -110,7 +110,28 @@ function createMSGraph() {
   var msXMiddle = (msXStart + msXEnd)/2 - 20;
   var moneySupply = new Konva.Line({
     points: [msXMiddle, msYStart - 1, msXMiddle, msYEnd],
-    stroke: 'red'
+    stroke: 'red',
+    draggable: true
+  });
+
+  moneySupply.dragBoundFunc(function(pos) {
+    var absY = this.getAbsolutePosition().y;
+    var xMax = 100;
+    var xMin = -60;
+    var x = pos.x;
+
+    if (x > xMax) {
+      x = xMax;
+    }
+
+    if (x < xMin) {
+      x = xMin;
+    }
+
+    return {
+      x: x,
+      y: absY
+    }
   });
 
   msLayer.add(moneySupply);
@@ -126,7 +147,7 @@ function createMSGraph() {
 
   msLayer.add(moneySupplyLabel);
 
-  msPlaceEqPoints((msXStart + msXEnd)/2 - 20, (msYStart + msYEnd)/2 + 1, 0)
+  // msPlaceEqPoints((msXStart + msXEnd)/2 - 20, (msYStart + msYEnd)/2 + 1, 0)
 
   return msLayer;
 }

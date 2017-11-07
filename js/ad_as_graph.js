@@ -181,25 +181,25 @@ function createAdAsGraph() {
   adasLayer.add(SRASMove);
 
   adasXMid = (adasXStart + adasXEnd) / 2 - 7;
-  var LRAS = new Konva.Line({
-    points: [adasXMid, adasYStart, adasXMid, adasYEnd],
-    stroke: 'red'
-  });
+  // var LRAS = new Konva.Line({
+  //   points: [adasXMid, adasYStart, adasXMid, adasYEnd],
+  //   stroke: 'red'
+  // });
+  //
+  // adasLayer.add(LRAS);
+  //
+  // var LRASLabel = new Konva.Label({
+  //   x: adasXMid + 15,
+  //   y: adasYEnd
+  // });
+  // LRASLabel.add(new Konva.Text({
+  //   text: 'LRAS',
+  //   fontSize: 18
+  // }));
+  //
+  // adasLayer.add(LRASLabel);
 
-  adasLayer.add(LRAS);
-
-  var LRASLabel = new Konva.Label({
-    x: adasXMid + 15,
-    y: adasYEnd
-  });
-  LRASLabel.add(new Konva.Text({
-    text: 'LRAS',
-    fontSize: 18
-  }));
-
-  adasLayer.add(LRASLabel);
-
-  adasPlaceEqPoint(adasXMid, (adasYStart + adasYEnd)/2 + 8, 0);
+  // adasPlaceEqPoint(adasXMid, (adasYStart + adasYEnd)/2 + 8, 0);
 
   return adasLayer;
 }
