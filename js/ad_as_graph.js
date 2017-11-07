@@ -86,31 +86,29 @@ function createAdAsGraph() {
   adMove.dragBoundFunc(function(pos) {
     var absX = this.getAbsolutePosition().x;
     var pts = this.points();
-    var yMax = 10;
-    var yMin = -10;
+    var yMax = 32;
+    var yMin = -52;
     var y = pos.y;
 
-    if (pts[1] >= 195 && pts[2] <= 255 && pts[3] <= 195 && y >= 95) {
-      this.points([60, 195, 255, 195]);
-      y = 95;
+    if (y > yMax) {
+      this.points([60, 132, 318, 258]);
+      y = 32;
     }
-    else if (pts[1] >= 290 && y <= -190) {
-      this.points([205, 290, 350, 290]);
-      y = -190;
+    if (y < yMin) {
+      this.points([112, 152, 350, 290]);
+      y = -52;
     }
-    else {
-      if (y > yMax) {
-        this.points([60, 100 + pos.y, 350 - pos.y, 290 - pos.y]);
-      }
 
-      if (y == 0) {
-        this.points([60, 100, 350, 290]);
-      }
+    if (y > 0 && y < yMax) {
+      this.points([60, 100 + pos.y, 350 - pos.y, 290 - pos.y]);
+    }
+    else if (y < 0 && y > yMin) {
+      var xVal = (60 + pos.y * -1 >= 205) ? 205 : 60 + pos.y * -1;
+      this.points([xVal, 100 + pos.y * -1, 350, 290]);
+    }
 
-      if (y < yMin) {
-        var xVal = (60 + pos.y * -1 >= 205) ? 205 : 60 + pos.y * -1;
-        this.points([xVal, 100 + pos.y * -1, 350, 290]);
-      }
+    if (y == 0) {
+      this.points([60, 100, 350, 290]);
     }
 
     return {
@@ -148,32 +146,30 @@ function createAdAsGraph() {
 
   SRASMove.dragBoundFunc(function(pos) {
     var absX = this.getAbsolutePosition().x;
-    var pts = this.points();
-    var yMax = 10;
-    var yMin = -10;
+    var yMax = 32;
+    var yMin = -42;
     var y = pos.y;
 
-    if (pts[1] >= 195 && pts[2] <= 350 && pts[3] <= 195 && y <= -95) {
-      this.points([60, 195, 350, 195]);
-      y = -95;
+    if (y > yMax) {
+      this.points([90, 258, 350, 132]);
+      y = 32;
     }
-    else if (pts[1] <= 195 && y >= 95) {
-      this.points([60, 195, 350, 195]);
-      y = 95;
+
+    if (y <= yMin) {
+      this.points([60, 249, 350, 141]);
+      y = -42;
     }
-    else {
-      if (y > yMax) {
-        this.points([60, 290 - pos.y, 350, 100 + pos.y]);
-      }
 
-      if (y == 0) {
-        this.points([60, 290, 350, 100]);
-      }
+    if (y > 0 && y < yMax) {
+      this.points([60 + pos.y, 290 - pos.y, 350, 100 + pos.y]);
+    }
+    else if (y < 0 && y > yMin) {
+      var xVal = (100 + pos.y * -1 >= 205) ? 205 : 100 + pos.y * -1;
+      this.points([60, 290 - pos.y * -1, 350, xVal]);
+    }
 
-      if (y < yMin) {
-        var xVal = (100 + pos.y * -1 >= 205) ? 205 : 100 + pos.y * -1;
-        this.points([60, 290 - pos.y * -1, 350, xVal]);
-      }
+    if (y == 0) {
+      this.points([60, 290, 350, 100]);
     }
 
     return {

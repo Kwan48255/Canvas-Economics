@@ -56,7 +56,42 @@ function createMSGraph() {
 
   var moneyDemand = new Konva.Line({
     points: [msXStart + 10, 100, msXEnd - 30, 290],
-    stroke: 'red'
+    stroke: 'red',
+    draggable: true
+  });
+
+  moneyDemand.dragBoundFunc(function(pos) {
+    var absX = this.getAbsolutePosition().x;
+    var pts = this.points();
+    var yMax = 32;
+    var yMin = -52;
+    var y = pos.y;
+
+    if (y > yMax) {
+      this.points([510, 131, 739, 259]);
+      y = 32;
+    }
+    if (y <= yMin) {
+      this.points([560, 150, 770, 290]);
+      y = -52;
+    }
+
+    if (y > 0 && y < yMax) {
+      this.points([msXStart + 10, 100 + pos.y, msXEnd - 30 - pos.y, 290 - pos.y]);
+    }
+    else if (y < 0 && y > yMin) {
+      var xVal = (msXStart + 10 + pos.y * -1 >= 205 + msXStart) ? 205 + msXStart : msXStart + 10 + pos.y * -1;
+      this.points([xVal, 100 + pos.y * -1, msXEnd - 30, 290]);
+    }
+
+    if (y == 0) {
+      this.points([msXStart + 10, 100, msXEnd - 30, 290]);
+    }
+
+    return {
+      x: absX,
+      y: y
+    }
   });
 
   msLayer.add(moneyDemand);
