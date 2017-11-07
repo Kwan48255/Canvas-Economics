@@ -113,8 +113,6 @@ function createAdAsGraph() {
       }
     }
 
-    adMoveLabel.visible = true;
-
     return {
       x: absX,
       y: y
@@ -126,7 +124,44 @@ function createAdAsGraph() {
 
   var SRAS = new Konva.Line({
     points: [60, 290, 350, 100],
-    stroke: 'red'
+    stroke: 'red',
+    draggable: true
+  });
+
+  SRAS.dragBoundFunc(function(pos) {
+    var absX = this.getAbsolutePosition().x;
+    var pts = this.points();
+    var yMax = 10;
+    var yMin = -10;
+    var y = pos.y;
+
+    if (pts[1] >= 195 && pts[2] <= 350 && pts[3] <= 195 && y <= -95) {
+      this.points([60, 195, 350, 195]);
+      y = -95;
+    }
+    else if (pts[1] <= 195 && y >= 95) {
+      this.points([60, 195, 350, 195]);
+      y = 95;
+    }
+    else {
+      if (y > yMax) {
+        this.points([60, 290 - pos.y, 350, 100 + pos.y]);
+      }
+
+      if (y == 0) {
+        this.points([60, 290, 350, 100]);
+      }
+
+      if (y < yMin) {
+        var xVal = (100 + pos.y * -1 >= 205) ? 205 : 100 + pos.y * -1;
+        this.points([60, 290 - pos.y * -1, 350, xVal]);
+      }
+    }
+
+    return {
+      x: absX,
+      y: y
+    }
   });
 
   adasLayer.add(SRAS);

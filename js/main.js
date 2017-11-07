@@ -9,7 +9,5 @@ var stage = new Konva.Stage({
 
 var adasLayer = createAdAsGraph();
 var msLayer = createMSGraph();
-var invLayer = createPhillipsCurve();
 stage.add(adasLayer);
 stage.add(msLayer);
-stage.add(invLayer);
