@@ -54,12 +54,12 @@ function createAdAsGraph() {
 
   adasLayer.add(yAxisLabel);
 
-  var adStatic = new Konva.Line({
-    points: [60, 100, 350, 290],
-    stroke: 'black'
-  });
-
-  adasLayer.add(adStatic);
+  // var adStatic = new Konva.Line({
+  //   points: [60, 100, 350, 290],
+  //   stroke: 'black'
+  // });
+  //
+  // adasLayer.add(adStatic);
 
   var adStaticLabel = new Konva.Label({
     x: 340,
@@ -121,14 +121,32 @@ function createAdAsGraph() {
 
   adasLayer.add(adMove);
 
+  // var SRAS = new Konva.Line({
+  //   points: [60, 290, 350, 100],
+  //   stroke: 'blue',
+  //   draggable: true
+  // });
+  //
+  // adasLayer.add(SRAS);
 
-  var SRAS = new Konva.Line({
+  var SRASLabel = new Konva.Label({
+    x: 340,
+    y: 120
+  });
+  SRASLabel.add(new Konva.Text({
+    text: 'SRAS',
+    fontSize: '18'
+  }));
+
+  adasLayer.add(SRASLabel);
+
+  var SRASMove = new Konva.Line({
     points: [60, 290, 350, 100],
     stroke: 'red',
     draggable: true
   });
 
-  SRAS.dragBoundFunc(function(pos) {
+  SRASMove.dragBoundFunc(function(pos) {
     var absX = this.getAbsolutePosition().x;
     var pts = this.points();
     var yMax = 10;
@@ -164,18 +182,7 @@ function createAdAsGraph() {
     }
   });
 
-  adasLayer.add(SRAS);
-
-  var SRASLabel = new Konva.Label({
-    x: 340,
-    y: 120
-  });
-  SRASLabel.add(new Konva.Text({
-    text: 'SRAS',
-    fontSize: '18'
-  }));
-
-  adasLayer.add(SRASLabel);
+  adasLayer.add(SRASMove);
 
   adasXMid = (adasXStart + adasXEnd) / 2 - 7;
   var LRAS = new Konva.Line({
