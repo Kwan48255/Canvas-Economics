@@ -57,12 +57,12 @@ function createAdAsGraph() {
 
   adasLayer.add(yAxisLabel);
 
-  // var adStatic = new Konva.Line({
-  //   points: [60, 100, 350, 290],
-  //   stroke: 'black'
-  // });
-  //
-  // adasLayer.add(adStatic);
+  var adStatic = new Konva.Line({
+    points: [60, 100, 350, 290],
+    stroke: 'black'
+  });
+
+  adasLayer.add(adStatic);
 
   var adStaticLabel = new Konva.Label({
     x: 340,

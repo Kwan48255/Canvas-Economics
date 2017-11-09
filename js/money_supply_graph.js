@@ -108,6 +108,12 @@ function createMSGraph() {
   msLayer.add(moneyDemandLabel);
 
   var msXMiddle = (msXStart + msXEnd)/2 - 20;
+  var moneySupplyStatic = new Konva.Line({
+    points: [msXMiddle, msYStart - 1, msXMiddle, msYEnd],
+    stroke: 'black',
+  });
+  msLayer.add(moneySupplyStatic);
+
   var moneySupply = new Konva.Line({
     points: [msXMiddle, msYStart - 1, msXMiddle, msYEnd],
     stroke: 'red',
