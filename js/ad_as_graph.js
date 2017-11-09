@@ -4,6 +4,9 @@ var adasXEnd = 375;
 var adasYStart = 300;
 var adasYEnd = 75;
 
+var adMove;
+var SRASMove;
+
 function createAdAsGraph() {
   var title = new Konva.Label({
     x: 50,
@@ -78,7 +81,7 @@ function createAdAsGraph() {
     visible: false
   });
 
-  var adMove = new Konva.Line({
+  adMove = new Konva.Line({
     points: [60, 100, 350, 290],
     stroke: 'red',
     draggable: true
@@ -132,7 +135,7 @@ function createAdAsGraph() {
     y: 120
   });
   SRASLabel.add(new Konva.Text({
-    text: 'SRAS',
+    text: 'AS',
     fontSize: '18'
   }));
 
@@ -202,6 +205,37 @@ function createAdAsGraph() {
   // adasPlaceEqPoint(adasXMid, (adasYStart + adasYEnd)/2 + 8, 0);
 
   return adasLayer;
+}
+
+function moveAD(pos) {
+  var yMax = 32;
+  var yMin = -52;
+  var y = pos.y;
+
+  if (y > yMax) {
+    adMove.points([60, 132, 318, 258]);
+    y = 32;
+  }
+  if (y < yMin) {
+    adMove.points([112, 152, 350, 290]);
+    y = -52;
+  }
+
+  if (y > 0 && y < yMax) {
+    adMove.points([60, 100 + pos.y, 350 - pos.y, 290 - pos.y]);
+  }
+  else if (y < 0 && y > yMin) {
+    var xVal = (60 + pos.y * -1 >= 205) ? 205 : 60 + pos.y * -1;
+    adMove.points([xVal, 100 + pos.y * -1, 350, 290]);
+  }
+
+  if (y == 0) {
+    adMove.points([60, 100, 350, 290]);
+  }
+
+  adMove.y(y);
+
+  stage.draw();
 }
 
 function adasPlaceEqPoint(x, y, num) {

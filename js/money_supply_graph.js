@@ -128,6 +128,8 @@ function createMSGraph() {
       x = xMin;
     }
 
+    moveAD({x: 0, y: x * -1});
+
     return {
       x: x,
       y: absY
